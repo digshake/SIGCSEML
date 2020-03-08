@@ -37,12 +37,12 @@ class MainActivity : AppCompatActivity() {
         //text recognition code here
     }
 
-    fun onFace(view: View) {
-        //facial recognition code here
+    fun onLabel(view: View) {
+        //image labelling code here
     }
 
-    fun onObject(view: View) {
-        //image labelling code here
+    fun onFace(view: View) {
+        //facial recognition code here
     }
 
     private fun toTextBox(label: String, value: Any?) {
