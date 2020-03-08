@@ -1,4 +1,4 @@
-package com.example.cse438.sigcseml
+package com.sigcse.mlkitworkshop.sigcseml
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.example.cse438.sigcseml
+package com.sigcse.mlkitworkshop
 
 import android.content.Context
 import android.graphics.*
