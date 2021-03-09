@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SIGCSEML</string>
+    <string name="text">Text</string>
+    <string name="face">Face</string>
+    <string name="label">Label</string>
+    <string name="previous">Previous</string>
+    <string name="camera">Camera</string>
+    <string name="next">Next</string>
 </resources>
