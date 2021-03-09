@@ -3,9 +3,8 @@ package com.sigcse.mlkitworkshop
 import android.content.Context
 import android.graphics.*
 import android.view.View
-import com.google.firebase.ml.vision.common.FirebaseVisionPoint
 
-class DrawingLineView(context: Context, var points: List<FirebaseVisionPoint>, var lineColor: Int) : View(context) {
+class DrawingLineView(context: Context, var points: List<PointF>, var lineColor: Int) : View(context) {
 
 
     override fun onDraw(canvas: Canvas) {

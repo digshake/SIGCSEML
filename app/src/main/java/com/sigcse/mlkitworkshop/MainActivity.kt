@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.PointF
 import android.graphics.Rect
 import android.os.Bundle
 import android.provider.MediaStore
@@ -14,6 +15,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.drawToBitmap
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.face.FaceDetection
+import com.google.mlkit.vision.face.FaceDetectorOptions
+import com.google.mlkit.vision.label.ImageLabeling
+import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
+import com.google.mlkit.vision.text.TextRecognition
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -34,15 +41,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onText(view: View) {
-        //text recognition code here
+
     }
 
     fun onLabel(view: View) {
-        //image labelling code here
+
     }
 
     fun onFace(view: View) {
-        //facial recognition code here
+
     }
 
     private fun toTextBox(label: String, value: Any?) {
@@ -56,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         runOnUiThread { imageHolder.setImageBitmap(bitmap) }
     }
 
-    private fun drawLine(points: List<FirebaseVisionPoint>, lineColor: Int) {
+    private fun drawLine(points: List<PointF>, lineColor: Int) {
         val drawingView = DrawingLineView(applicationContext, points, lineColor)
         val bitmap = imageHolder.drawToBitmap()
         drawingView.draw(Canvas(bitmap))
