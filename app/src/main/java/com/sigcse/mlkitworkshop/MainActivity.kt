@@ -3,10 +3,7 @@ package com.sigcse.mlkitworkshop
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.PointF
-import android.graphics.Rect
+import android.graphics.*
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
@@ -15,9 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.drawToBitmap
+import com.google.android.gms.vision.face.Face
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.face.FaceContour
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetectorOptions
+import com.google.mlkit.vision.face.FaceLandmark
 import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import com.google.mlkit.vision.text.TextRecognition
@@ -70,18 +70,18 @@ class MainActivity : AppCompatActivity() {
         runOnUiThread { imageHolder.setImageBitmap(bitmap) }
     }
 
-    private fun addImage(x: Float, y: Float, height: Int, width: Int, angle: Float, fileName: String) {
+    private fun addImage(x: Float, y: Float, bounds: Rect, angle: Float, fileName: String) {
         val img = ImageView(this)
         val resID = resources.getIdentifier(fileName, "drawable", packageName)
         img.setImageResource(resID)
         frame.addView(img)
         val params = img.layoutParams
-        params.height = height
-        params.width = width
+        params.height = bounds.height()
+        params.width = bounds.width()
         img.layoutParams = params
         img.visibility = View.VISIBLE
-        img.x = x - (width/2)
-        img.y = y - (width/2)
+        img.x = x - (bounds.width()/2)
+        img.y = y - (bounds.height()/2)
         img.rotation = angle
         img.bringToFront()
     }
