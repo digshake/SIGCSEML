@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private var imageIndex: Int = 1
-    private val maxIndex = 4
+    private val maxIndex = 5
 
     companion object {
         const val REQUEST_CAMERA_PERMISSIONS = 1
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
         if(permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                arrayOf(android.Manifest.permission.CAMERA),REQUEST_CAMERA_PERMISSIONS)
+                    arrayOf(android.Manifest.permission.CAMERA),REQUEST_CAMERA_PERMISSIONS)
         } else {
             val cIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(cIntent, IMAGE_CAPTURE_CODE)
