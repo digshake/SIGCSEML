@@ -18,12 +18,13 @@ import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
-import kotlinx.android.synthetic.main.activity_main.*
+import com.sigcse.mlkitworkshop.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private var imageIndex: Int = 1
     private val maxIndex = 5
+    private lateinit var binding: ActivityMainBinding
 
     companion object {
         const val REQUEST_CAMERA_PERMISSIONS = 1
@@ -32,15 +33,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        textOutput.showSoftInputOnFocus = false
-        textOutput.isFocusable = false
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        binding.textOutput.showSoftInputOnFocus = false
+        binding.textOutput.isFocusable = false
     }
 
     fun onText(view: View) {
 
     }
-
+    
     fun onLabel(view: View) {
 
     }
@@ -50,28 +53,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toTextBox(label: String, value: Any?) {
-        textOutput.append("$label: $value\n")
+        binding.textOutput.append("$label: $value\n")
     }
 
     private fun drawBox(bounds: Rect, label: String, boxColor: Int, textColor: Int) {
         val drawingView = DrawingView(applicationContext, bounds, label, boxColor, textColor)
-        val bitmap = imageHolder.drawToBitmap()
+        val bitmap = binding.imageHolder.drawToBitmap()
         drawingView.draw(Canvas(bitmap))
-        runOnUiThread { imageHolder.setImageBitmap(bitmap) }
+        runOnUiThread { binding.imageHolder.setImageBitmap(bitmap) }
     }
 
     private fun drawLine(points: List<PointF>, lineColor: Int) {
         val drawingView = DrawingLineView(applicationContext, points, lineColor)
-        val bitmap = imageHolder.drawToBitmap()
+        val bitmap = binding.imageHolder.drawToBitmap()
         drawingView.draw(Canvas(bitmap))
-        runOnUiThread { imageHolder.setImageBitmap(bitmap) }
+        runOnUiThread { binding.imageHolder.setImageBitmap(bitmap) }
     }
 
     private fun addImage(x: Float, y: Float, bounds: Rect, angle: Float, fileName: String) {
         val img = ImageView(this)
         val resID = resources.getIdentifier(fileName, "drawable", packageName)
         img.setImageResource(resID)
-        frame.addView(img)
+        binding.frame.addView(img)
         val params = img.layoutParams
         params.height = bounds.height()
         params.width = bounds.width()
@@ -115,7 +118,7 @@ class MainActivity : AppCompatActivity() {
         if(requestCode == IMAGE_CAPTURE_CODE) {
             if(resultCode == Activity.RESULT_OK) {
                 val bitmap = data!!.extras!!["data"] as Bitmap
-                imageHolder.setImageBitmap(bitmap)
+                binding.imageHolder.setImageBitmap(bitmap)
             }
         }
     }
@@ -126,10 +129,10 @@ class MainActivity : AppCompatActivity() {
             imageIndex = 1
         }
         val resID = resources.getIdentifier("pic$imageIndex", "drawable", packageName)
-        imageHolder.setImageResource(resID)
-        textOutput.setText("")
-        frame.removeAllViews()
-        frame.addView(imageHolder)
+        binding.imageHolder.setImageResource(resID)
+        binding.textOutput.setText("")
+        binding.frame.removeAllViews()
+        binding.frame.addView(binding.imageHolder)
     }
 
     fun onPrev(view: View) {
@@ -138,9 +141,9 @@ class MainActivity : AppCompatActivity() {
             imageIndex = maxIndex
         }
         val resID = resources.getIdentifier("pic$imageIndex", "drawable", packageName)
-        imageHolder.setImageResource(resID)
-        textOutput.setText("")
-        frame.removeAllViews()
-        frame.addView(imageHolder)
+        binding.imageHolder.setImageResource(resID)
+        binding.textOutput.setText("")
+        binding.frame.removeAllViews()
+        binding.frame.addView(binding.imageHolder)
     }
 }
